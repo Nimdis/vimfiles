@@ -201,7 +201,7 @@ set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 "set listchars=tab:\ \ ,extends:>,precedes:<
 " disabling list because it interferes with soft wrap
 
-set formatoptions-=o "dont continue comments when pushing o/O
+set formatoptions-=o "dont continue commentd when pushing o/O
 
 "vertical/horizontal scroll off settings
 set scrolloff=3
@@ -230,14 +230,14 @@ if has("gui_running")
     "tell the term has 256 colors
     set t_Co=256
 
-    colorscheme molokai
+    colorscheme railscasts
     set guitablabel=%M%t
     set lines=40
     set columns=115
 
     if has("gui_gnome")
         set term=gnome-256color
-        colorscheme molokai
+        colorscheme railscasts
         set guifont=Monospace\ Bold\ 12
     endif
 
@@ -257,11 +257,11 @@ else
     "set railscasts colorscheme when running vim in gnome terminal
     if $COLORTERM == 'gnome-terminal'
         set term=gnome-256color
-        colorscheme molokai
+        colorscheme railscasts
     else
         if $TERM == 'xterm'
             set term=xterm-256color
-            colorscheme molokai
+            colorscheme railscasts
         else
             colorscheme default
         endif
@@ -403,8 +403,8 @@ map <C-l> <C-w>l
 nmap <C-s> :w<CR>
 
 "key mapping for tab navigation
-nmap <S-Tab> gt
-nmap <C-S-Tab> gT
+nmap <Tab> gt
+nmap <S-Tab> gT
 
 "Key mapping for textmate-like indentation
 nmap <D-[> <<
@@ -450,3 +450,4 @@ inoremap <Esc>D <left>
 if has("balloon_eval")
   set noballooneval
 endif
+au BufNewFile,BufRead *.ejs set filetype=html
