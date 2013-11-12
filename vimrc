@@ -215,10 +215,6 @@ filetype indent on
 "turn on syntax highlighting
 syntax on
 
-"some stuff to get the mouse going in term
-set mouse=a
-set ttymouse=xterm2
-
 "hide buffers when not displayed
 set hidden
 
