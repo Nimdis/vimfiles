@@ -42,7 +42,7 @@ nmap <D-6> g^
 nmap <D-0> g^
 
 "add some line space for easy reading
-set linespace=4
+set linespace=2
 
 "disable visual bell
 set visualbell t_vb=
@@ -181,9 +181,9 @@ function! s:Median(nums)
 endfunction
 
 "indent settings
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set autoindent
 
