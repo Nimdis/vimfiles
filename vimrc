@@ -107,19 +107,19 @@ autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
 "return '[mixed-indenting]' if spaces and tabs are used to indent
 "return an empty string if everything is fine
 function! StatuslineTabWarning()
-    if !exists("b:statusline_tab_warning")
-        let tabs = search('^\t', 'nw') != 0
-        let spaces = search('^ ', 'nw') != 0
+  if !exists("b:statusline_tab_warning")
+    let tabs = search('^\t', 'nw') != 0
+    let spaces = search('^ ', 'nw') != 0
 
-        if tabs && spaces
-            let b:statusline_tab_warning =  '[mixed-indenting]'
-        elseif (spaces && !&et) || (tabs && &et)
-            let b:statusline_tab_warning = '[&et]'
-        else
-            let b:statusline_tab_warning = ''
-        endif
+    if tabs && spaces
+      let b:statusline_tab_warning =  '[mixed-indenting]'
+    elseif (spaces && !&et) || (tabs && &et)
+      let b:statusline_tab_warning = '[&et]'
+    else
+      let b:statusline_tab_warning = ''
     endif
-    return b:statusline_tab_warning
+  endif
+  return b:statusline_tab_warning
 endfunction
 
 "recalculate the long line warning when idle and after saving
@@ -377,6 +377,9 @@ endfunction
 
 " Strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
+    if &ft=='markdown'
+      return
+    endif
     " Preparation: save last search, and cursor position.
     let _s=@/
     let l = line(".")
@@ -387,7 +390,10 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
+autocmd BufNewFile,BufRead *.md set list
+autocmd BufNewFile,BufRead *.md set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
 "key mapping for window navigation
 map <C-h> <C-w>h
@@ -447,3 +453,6 @@ if has("balloon_eval")
   set noballooneval
 endif
 au BufNewFile,BufRead *.ejs set filetype=html
+
+"uncomment if you want enable spell checking in md
+"autocmd BufNewFile,BufRead *.md set spell
